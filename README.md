@@ -39,6 +39,7 @@ class UsersView(APIView):
         print(request.version)
         return HttpResponse('用户列表')
 ```
+
 ![Untitled-1-2018420213639](http://p693ase25.bkt.clouddn.com/Untitled-1-2018420213639.png)
 - 这3个只需要在配置文件中设置就可以
 
@@ -68,7 +69,10 @@ urlpatterns = [
 ```
 - 源码流程
     - 返回版本是在封装request之后，认证和权限之前做的
+
     - BaseVersioning对象
+
+      ​
 
 
 ![Untitled-1-2018420213814](http://p693ase25.bkt.clouddn.com/Untitled-1-2018420213814.png)
