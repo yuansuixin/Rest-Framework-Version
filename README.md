@@ -72,7 +72,7 @@ urlpatterns = [
 
     - BaseVersioning对象
 
-      ​
+
 
 
 ![Untitled-1-2018420213814](http://p693ase25.bkt.clouddn.com/Untitled-1-2018420213814.png)
@@ -96,9 +96,12 @@ class UsersView(APIView):
         return HttpResponse('用户列表')
 ```
 - 除了这些，版本的实现还有很多
+
+
   ![Untitled-1-2018420214715](http://p693ase25.bkt.clouddn.com/Untitled-1-2018420214715.png)
 
 ##### 总结
+
 - 使用   配置文件
 ```
 REST_FRAMEWORK = {
