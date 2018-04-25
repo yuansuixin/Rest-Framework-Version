@@ -5,74 +5,18 @@
 - url中通过GET传参
   自定义的版本
 
-```
-from django.http import HttpResponse
-from django.shortcuts import render
-
-# Create your views here.
-from rest_framework.views import APIView
-from rest_framework.request import Request
-
-
-class ParamVersion(object):
-    def determin_version(self,request):
-        version = request.query_params.get('version')
-        return version
-
-class UsersView(APIView):
-    def get(self,request,*args,**kwargs):
-        # request首先是先从自己的类中拿，如果自己的类中没有，就去原生的那个类中的去拿，
-        # 否则就会抛出异常
-        # version = request._request.GET.get('version')
-        # print(version)
-        # version = request.query_param.get('version') # 和request._request.GET.get('version')取值完全一样
-        # print version
-        return HttpResponse('用户列表')
-```
 - 使用内置的类
 
-```
-from rest_framework.versioning import QueryParameterVersioning
-class UsersView(APIView):
-    versioning_class = QueryParameterVersioning
-    def get(self,request,*args,**kwargs):
-        print(request.version)
-        return HttpResponse('用户列表')
-```
 
 ![Untitled-1-2018420213639](http://p693ase25.bkt.clouddn.com/Untitled-1-2018420213639.png)
 - 这3个只需要在配置文件中设置就可以
 
 - 在url路径中传参(推荐使用)
 
-```
-REST_FRAMEWORK = {
-    'DEFAULT_VERSION_CLASS':'rest_framework.versioning.URLPathVersioning',
-    'DEFAULT_VERSION':'v1',
-    'ALLOWED_VERSIONS':['v1','v2'],
-    'VERSION_PARAM':'version',
-}
-```
-```
-class UsersView(APIView):
-    def get(self,request,*args,**kwargs):
-        print(request.version)
-        return HttpResponse('用户列表')
-
-```
-
-```
-urlpatterns = [
- # url(r'^users/',views.UsersView.as_view()),
- url(r'^(?P<version>[v1|v2]+)/users/$',views.UsersView.as_view()),
-]
-```
 - 源码流程
     - 返回版本是在封装request之后，认证和权限之前做的
 
     - BaseVersioning对象
-
-
 
 
 ![Untitled-1-2018420213814](http://p693ase25.bkt.clouddn.com/Untitled-1-2018420213814.png)
